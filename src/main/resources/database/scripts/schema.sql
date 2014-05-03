@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS albums;
+
+CREATE TABLE albums (
+
+	id bigint PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(100) NOT NULL,
+	author VARCHAR(100) NOT NULL,
+	year_of_release INTEGER(4) NOT NULL
+);
