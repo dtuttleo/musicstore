@@ -2,42 +2,48 @@ package com.practicing.musicstore.endtoend;
 
 import static org.fest.assertions.Assertions.assertThat;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import com.practicing.musicstore.endtoend.pagemodel.CreateAlbumPage;
+import com.practicing.musicstore.endtoend.pagemodel.MainPage;
+import com.practicing.musicstore.model.Album;
+
 public class EndToEndTest {
 
-	WebDriver driver;
+	private WebDriver driver;
+	private MainPage mainPage;
+	private CreateAlbumPage createAlbumPage;
 
 	@Before
 	public void initDriver() {
 		driver = new FirefoxDriver();
 		driver.get("http://localhost:8080/musicstore");
+		mainPage = new MainPage(driver);
+		createAlbumPage = new CreateAlbumPage(driver);
 	}
 
 	@Test
 	public void appShouldDisplayWelcomeMessage() {
-		String welcomeText = driver.findElement(By.tagName("h1")).getText();
 
-		assertThat(welcomeText).isEqualTo("Hello world!");
+		assertThat(mainPage.getHeader().getText()).isEqualTo("Hello world!");
 	}
 
 	@Test
 	public void newAlbumShouldBeCreated() {
-		driver.findElement(By.cssSelector("a[data-testid='createAlbumLink']")).click();
-		driver.findElement(By.cssSelector("input[name='name']")).sendKeys("AlbumName");
-		;
-		driver.findElement(By.cssSelector("input[name='author']")).sendKeys("band Name");
-		;
-		driver.findElement(By.cssSelector("input[name='yearOfRelease']")).sendKeys("Year");
-		driver.findElement(By.cssSelector("input[type='submit']")).click();
+		Album album = new Album(RandomStringUtils.randomAlphanumeric(30), RandomStringUtils.randomAlphabetic(20),
+				RandomUtils.nextInt(0, 10000));
 
-		String text = driver.findElement(By.cssSelector("label[data-testid='success']")).getText();
-		assertThat(text).isEqualTo("Album Succesfully Created");
+		mainPage.getCreateAlbumLink().click();
+
+		createAlbumPage.createAlbum(album);
+
+		assertThat(mainPage.getSuccessLabel().getText()).isEqualTo("Album Succesfully Created");
 
 	}
 
