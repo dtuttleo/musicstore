@@ -1,5 +1,7 @@
 package com.practicing.musicstore.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -26,6 +28,12 @@ public class JpaAlbumDao implements AlbumDao {
 	public void add(Album album) {
 		entityManager.persist(album);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Album> getAllAlbums() {
+		return entityManager.createQuery("from Album").getResultList();
 	}
 
 }

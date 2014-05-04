@@ -1,5 +1,7 @@
 package com.practicing.musicstore.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -23,6 +25,11 @@ public class DefaultAlbumService implements AlbumService {
 	@Transactional(readOnly = false)
 	public void createAlbum(Album album) {
 		dao.add(album);
+	}
+
+	@Override
+	public List<Album> getAlbumList() {
+		return dao.getAllAlbums();
 	}
 
 }

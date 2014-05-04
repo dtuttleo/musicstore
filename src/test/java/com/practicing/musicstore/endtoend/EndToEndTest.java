@@ -19,6 +19,8 @@ public class EndToEndTest {
 	private WebDriver driver;
 	private MainPage mainPage;
 	private CreateAlbumPage createAlbumPage;
+	private Album album = new Album(RandomStringUtils.randomAlphanumeric(30), RandomStringUtils.randomAlphabetic(20),
+			RandomUtils.nextInt(0, 10000));
 
 	@Before
 	public void initDriver() {
@@ -36,8 +38,6 @@ public class EndToEndTest {
 
 	@Test
 	public void newAlbumShouldBeCreated() {
-		Album album = new Album(RandomStringUtils.randomAlphanumeric(30), RandomStringUtils.randomAlphabetic(20),
-				RandomUtils.nextInt(0, 10000));
 
 		mainPage.getCreateAlbumLink().click();
 
@@ -45,6 +45,15 @@ public class EndToEndTest {
 
 		assertThat(mainPage.getSuccessLabel().getText()).isEqualTo("Album Succesfully Created");
 
+	}
+
+	@Test
+	public void recentlyCreatedAlbumShouldBelisted() {
+		mainPage.getCreateAlbumLink().click();
+
+		createAlbumPage.createAlbum(album);
+
+		assertThat(mainPage.isAlbumListed(album)).isTrue();
 	}
 
 	@After

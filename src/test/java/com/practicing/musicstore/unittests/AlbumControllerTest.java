@@ -2,11 +2,15 @@ package com.practicing.musicstore.unittests;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,4 +59,18 @@ public class AlbumControllerTest {
 
 		verify(albumService).createAlbum(album);
 	}
+
+	@Test
+	public void shouldListAllAlbums() throws Exception {
+		List<Album> albumList = Arrays.asList(new Album("album1", "artist1", 1687), new Album("album 2", "artist 2",
+				1358));
+		when(albumService.getAlbumList()).thenReturn(albumList);
+
+		ResultActions actions = this.mockMvc.perform(get("/").accept(MediaType.TEXT_HTML));
+
+		actions.andExpect(status().isOk()).andExpect(model().attribute("albums", albumList))
+				.andExpect(view().name("index"));
+
+	}
+
 }

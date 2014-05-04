@@ -1,5 +1,7 @@
 package com.practicing.musicstore.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,11 @@ public class AlbumController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String index() {
+	public String index(Model model) {
+
+		List<Album> albumList = service.getAlbumList();
+
+		model.addAttribute("albums", albumList);
 
 		return "index";
 	}
@@ -48,6 +54,8 @@ public class AlbumController {
 		service.createAlbum(album);
 
 		model.addAttribute("success", true);
+
+		model.addAttribute("albums", service.getAlbumList());
 
 		return "index";
 	}
