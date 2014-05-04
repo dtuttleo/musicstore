@@ -3,10 +3,13 @@ package com.practicing.musicstore.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +31,11 @@ public class AlbumController {
 
 	}
 
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setAllowedFields("name", "author", "yearOfRelease");
+	}
+
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Model model) {
 
@@ -46,9 +54,11 @@ public class AlbumController {
 	}
 
 	@RequestMapping(value = "/album", method = RequestMethod.POST)
-	public String createAlbum(@ModelAttribute("album") Album album, BindingResult result, Model model) {
+	public String createAlbum(@ModelAttribute("album") @Valid Album album, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
+
+			return "createAlbum";
 		}
 
 		service.createAlbum(album);

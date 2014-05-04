@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "albums")
@@ -15,14 +20,22 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@Size(max = 100)
+	@NotBlank
+	@NotNull
 	@Column(name = "name")
 	private String name;
 
+	@Size(max = 100)
+	@NotBlank
+	@NotNull
 	@Column(name = "author")
 	private String author;
 
+	@NotNull
+	@Digits(integer = 4, fraction = 0)
 	@Column(name = "year_of_release")
-	private int yearOfRelease;
+	private Integer yearOfRelease;
 
 	public Album(String albumName, String author, int yearOfRelease) {
 
@@ -51,7 +64,7 @@ public class Album {
 		return author;
 	}
 
-	public int getYearOfRelease() {
+	public Integer getYearOfRelease() {
 		return yearOfRelease;
 	}
 
@@ -63,7 +76,7 @@ public class Album {
 		this.author = author;
 	}
 
-	public void setYearOfRelease(int yearOfRelease) {
+	public void setYearOfRelease(Integer yearOfRelease) {
 		this.yearOfRelease = yearOfRelease;
 	}
 
@@ -72,8 +85,9 @@ public class Album {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + yearOfRelease;
+		result = prime * result + ((yearOfRelease == null) ? 0 : yearOfRelease.hashCode());
 		return result;
 	}
 
@@ -91,12 +105,17 @@ public class Album {
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
+		if (id != other.id)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (yearOfRelease != other.yearOfRelease)
+		if (yearOfRelease == null) {
+			if (other.yearOfRelease != null)
+				return false;
+		} else if (!yearOfRelease.equals(other.yearOfRelease))
 			return false;
 		return true;
 	}
