@@ -33,7 +33,7 @@ public class EndToEndTest {
 	@Test
 	public void appShouldDisplayWelcomeMessage() {
 
-		assertThat(mainPage.getHeader().getText()).isEqualTo("Hello world!");
+		assertThat(mainPage.getHeader().getText()).isEqualTo("Music Store");
 	}
 
 	@Test

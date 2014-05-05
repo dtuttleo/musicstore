@@ -18,7 +18,7 @@ public class CreateAlbumPage {
 	@FindBy(name = "yearOfRelease")
 	private WebElement yearOfReleaseTextBox;
 
-	@FindBy(css = "input[type='submit']")
+	@FindBy(css = "button[type='submit']")
 	private WebElement submitButton;
 
 	public CreateAlbumPage(WebDriver driver) {

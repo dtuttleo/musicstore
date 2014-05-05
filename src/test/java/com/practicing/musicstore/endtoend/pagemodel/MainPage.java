@@ -17,7 +17,7 @@ public class MainPage {
 	@FindBy(css = "a[data-testid='createAlbumLink']")
 	private WebElement createAlbumLink;
 
-	@FindBy(tagName = "h1")
+	@FindBy(css = ".navbar-brand")
 	private WebElement header;
 
 	@FindBy(css = "label[data-testid='success']")
