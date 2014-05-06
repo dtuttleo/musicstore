@@ -5,12 +5,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
 import com.practicing.musicstore.model.Album;
+import com.practicing.musicstore.provider.AlbumProvider;
 import com.practicing.musicstore.repository.AlbumDao;
 import com.practicing.musicstore.service.AlbumService;
 import com.practicing.musicstore.service.DefaultAlbumService;
@@ -22,7 +22,7 @@ public class AlbumServiceTest {
 
 		AlbumDao dao = mock(AlbumDao.class);
 		AlbumService service = new DefaultAlbumService(dao);
-		Album album = new Album("albumname", "bandname", 1524);
+		Album album = AlbumProvider.timeStampedAlbum();
 
 		service.createAlbum(album);
 
@@ -33,8 +33,7 @@ public class AlbumServiceTest {
 	public void shouldReturnAllAlbums() {
 		AlbumDao dao = mock(AlbumDao.class);
 		AlbumService service = new DefaultAlbumService(dao);
-		List<Album> albums = Arrays
-				.asList(new Album("album1", "artist1", 1687), new Album("album 2", "artist 2", 1358));
+		List<Album> albums = AlbumProvider.getAlbums(15);
 		when(dao.getAllAlbums()).thenReturn(albums);
 
 		List<Album> returnedAlbums = service.getAlbumList();

@@ -17,11 +17,11 @@ public class MainPage {
 	@FindBy(css = "a[data-testid='createAlbumLink']")
 	private WebElement createAlbumLink;
 
+	@FindBy(css = "a[data-testid='homeLink']")
+	private WebElement homeLink;
+
 	@FindBy(css = ".navbar-brand")
 	private WebElement header;
-
-	@FindBy(css = "label[data-testid='success']")
-	private WebElement successLabel;
 
 	public MainPage(WebDriver driver) {
 		this.driver = driver;
@@ -32,12 +32,12 @@ public class MainPage {
 		return createAlbumLink;
 	}
 
-	public WebElement getHeader() {
-		return header;
+	public WebElement getHomeLink() {
+		return homeLink;
 	}
 
-	public WebElement getSuccessLabel() {
-		return successLabel;
+	public WebElement getHeader() {
+		return header;
 	}
 
 	public boolean isAlbumListed(Album album) {

@@ -43,7 +43,7 @@ public class EndToEndTest {
 
 		createAlbumPage.createAlbum(album);
 
-		assertThat(mainPage.getSuccessLabel().getText()).isEqualTo("Album Succesfully Created");
+		assertThat(createAlbumPage.getSuccessLabel().getText()).isEqualTo("Album Succesfully Created");
 
 	}
 
@@ -52,6 +52,7 @@ public class EndToEndTest {
 		mainPage.getCreateAlbumLink().click();
 
 		createAlbumPage.createAlbum(album);
+		mainPage.getHomeLink().click();
 
 		assertThat(mainPage.isAlbumListed(album)).isTrue();
 	}

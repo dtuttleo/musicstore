@@ -15,7 +15,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
           <ul class="nav navbar-nav">
-            <li><a href='<spring:url value="/"></spring:url>'>Home</a></li>
+            <li><a href='<spring:url value="/"></spring:url>' data-testid="homeLink">Home</a></li>
             <li><a href="album" data-testid="createAlbumLink">Create Album</a></li>
             <li><a href="#">Link</a></li>
           </ul>

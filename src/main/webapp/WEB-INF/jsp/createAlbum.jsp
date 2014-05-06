@@ -1,19 +1,15 @@
  <!DOCTYPE html>
- 
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
  
  <html>
- 	<head>
- 	<spring:url value="/webjars/bootstrap/3.1.0/css/bootstrap.min.css" var="bootstrapCss"/>
- 	<link rel="stylesheet" href="${bootstrapCss}">
- 	</head>
+	<%@ include file="includes/headTag.jsp" %>
 	<body>
 		<div class="container">		
 			<%@ include file="includes/navbar.jsp" %>
 			<h1 class="col-sm-offset-5 col-sm-7">Create New Album</h1>
-		 
-		 		
+				 		
 			<form:form modelAttribute="album" method="post" class="form-horizontal" role="form">
 				<div class="form-group">
 		 			<label for="albumName" class="col-sm-6 control-label">Album's name</label>
@@ -47,6 +43,11 @@
 				</div>	
 					
 			 </form:form>
+			 <div class="row">			 	 			 			
+				<c:if test="${success eq true}">
+					<div class="alert alert-success col-sm-offset-4 col-sm-4" data-testid="success">Album Succesfully Created</div>
+				</c:if>
+			 </div>
 		 </div>
 	 </body>
  </html>

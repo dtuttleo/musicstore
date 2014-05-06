@@ -11,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;
@@ -23,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.practicing.musicstore.controller.AlbumController;
 import com.practicing.musicstore.model.Album;
+import com.practicing.musicstore.provider.AlbumProvider;
 import com.practicing.musicstore.service.AlbumService;
 
 public class AlbumControllerTest {
@@ -53,13 +53,13 @@ public class AlbumControllerTest {
 				.param("yearOfRelease", ANY_YEAR));
 
 		actions.andExpect(status().isOk()).andExpect(model().attribute("success", true))
-				.andExpect(view().name("index"));
+				.andExpect(view().name("createAlbum"));
 	}
 
 	@Test
 	public void shouldCreateNewAlbum() throws Exception {
 
-		Album album = new Album("Album 1", "Band 1", 1987);
+		Album album = AlbumProvider.timeStampedAlbum();
 
 		this.mockMvc.perform(post("/album").param("name", album.getName()).param("author", album.getAuthor())
 				.param("yearOfRelease", String.valueOf(album.getYearOfRelease())));
@@ -124,15 +124,13 @@ public class AlbumControllerTest {
 
 	@Test
 	public void shouldListAllAlbums() throws Exception {
-		List<Album> albumList = Arrays.asList(new Album("album1", "artist1", 1687), new Album("album 2", "artist 2",
-				1358));
+		List<Album> albumList = AlbumProvider.getAlbums(20);
 		when(albumService.getAlbumList()).thenReturn(albumList);
 
 		ResultActions actions = this.mockMvc.perform(get("/").accept(MediaType.TEXT_HTML));
 
-		actions.andExpect(status().isOk()).andExpect(model().attribute("albums", albumList))
-				.andExpect(view().name("index"));
-
+		actions.andExpect(status().isOk()).andExpect(model().attributeExists("albums")).andExpect(view().name("index"));
+		verify(albumService).getAlbumList();
 	}
 
 }

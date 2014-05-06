@@ -21,6 +21,9 @@ public class CreateAlbumPage {
 	@FindBy(css = "button[type='submit']")
 	private WebElement submitButton;
 
+	@FindBy(css = "div[data-testid='success']")
+	private WebElement successLabel;
+
 	public CreateAlbumPage(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
@@ -39,6 +42,10 @@ public class CreateAlbumPage {
 
 	public WebElement getSubmitButton() {
 		return submitButton;
+	}
+
+	public WebElement getSuccessLabel() {
+		return successLabel;
 	}
 
 	public void createAlbum(Album album) {
