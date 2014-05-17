@@ -1,0 +1,157 @@
+body{
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	width: 960px;
+	margin: 0px auto;
+}
+
+#pageHeader {
+	width: 100%;
+	background-color: rgb(5,5,0);
+	border-radius: 5px;
+	height: 50px;
+
+}
+
+#logo{
+	color: rgb(240,240,240);
+	font-family: 'Fredoka One', cursive;
+	font-size: 30px;
+	float: left;
+	padding: 0.2em 0.5em;
+}
+
+#topMenu ul{
+	list-style: none;
+	text-align: right;
+	margin: 0px;
+}
+
+#topMenu li{
+	display: inline-block;
+	margin-right: 0px;
+
+}
+#topMenu a{
+	color: rgb(240,240,240);
+	display: block;
+	padding: 16px 10px;
+	text-decoration: none;
+	border-left: 1px solid white;	
+}
+
+#topMenu a:hover{
+	background-color: rgba(0,179,33, 0.8);
+}
+
+#albumList
+{
+	float: left;
+	margin-top: 2%;
+	text-align: center;
+	width: 70%;
+	margin-bottom: 5%;
+	border: 2px solid rgb(5,5,0);
+	border-radius: 6px;
+	box-shadow: 0 1px 1px;
+	padding-bottom: 1em;
+}
+
+#albumList table{
+	
+	margin: 3% auto;
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 8%;
+/*	border-radius: 6px;
+	border: 1px solid*/
+}
+
+#albumList table td{
+	padding: 3%;
+}
+
+
+#albumList table th{
+	border-top-left-radius: 3px;
+	background-color: rgba(0,179,33, 0.8);
+	color: rgb(255,247,227);
+	padding: 1%;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+
+}
+
+#topList
+{
+	text-align: center;
+	float:left;
+	margin-top: 2%;
+	width: 25%;
+	border: 2px solid rgb(5,5,0);
+	border-radius: 6px;
+	box-shadow: 0 1px 1px;
+	margin-left: 4%;
+}
+
+tr:nth-child(even) {
+	background: #CCC;
+}
+
+footer{
+	text-align: center;
+}
+
+#pageFooter{
+	clear: both;
+	margin-top: 5%
+}
+
+.nav_button{
+	background-color: rgba(0,179,33, 0.8);
+	border-radius: 5px;
+	display: inline-block;
+	padding: 0.5em;
+	width: 15%;
+	padding: 0px;
+}
+
+.nav_button a {
+	text-decoration: none;
+	color: rgb(255,247,227);
+	display: block;
+	padding: 8px;
+}
+
+#albumForm div{
+	width: 35%;
+	margin: 0 auto;
+	clear: left;
+}
+
+#albumForm label{
+	float: left;
+	width: 125px;
+}
+#albumForm input{
+	float: left;	
+}
+
+#albumForm button{
+	display: block;
+	clear: both;
+	margin: 2em auto;
+}
+#numberPages{
+	float: right;
+	margin-right: 10px;
+}
+
+.alert-success
+{
+	text-align: center;
+	background-color: rgba(0,179,33, 0.8);
+	color: rgb(255,247,227);
+	border-radius: 3px;
+	font-weight:bold; 
+		
+}

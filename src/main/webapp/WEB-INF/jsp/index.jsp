@@ -5,38 +5,65 @@
 <html>
 	<%@ include file="includes/headTag.jsp" %>
 	<body>	
-		
-		<div class="container">	
-			<%@ include file="includes/navbar.jsp" %>
-
-			<h2>Number of albums: ${fn:length(albums.source)}</h2>			
-			<div class ="row">
-					<table class="table table-striped">
+	<%@ include file="includes/navbar.jsp" %>
+	
+		<section id="albumList">
+			<header>
+				<h3>Album List</h3>
+			</header>	
+			<article>
+				<table class="table table-striped">
+					<tr>
+						<th>Name</th>
+						<th>Author</th>
+						<th>Year Of Release</th>
+					</tr>
+					<c:forEach items="${albums.pageList}" var="album">
 						<tr>
-							<th>Name</th>
-							<th>Author</th>
-							<th>Year Of Release</th>
+							<td><c:out value="${album.name}"></c:out></td>
+							<td><c:out value="${album.author}"></c:out></td>
+							<td><c:out value="${album.yearOfRelease}"></c:out></td>
 						</tr>
-						<c:forEach items="${albums.pageList}" var="album">
-							<tr>
-								<td><c:out value="${album.name}"></c:out></td>
-								<td><c:out value="${album.author}"></c:out></td>
-								<td><c:out value="${album.yearOfRelease}"></c:out></td>
-							</tr>
-						</c:forEach>		
-					</table>					
-			</div>
-			<div class="row">
-				<label class="col-sm-offset-10 col-sm-2">Page ${albums.page +1 } of ${albums.pageCount} </label>
-				<ul class="pager">
+					</c:forEach>		
+				</table>
+			</article>
+			<footer>
+				<nav>
 					<c:if test="${!albums.firstPage}">
-						<li><a href="${pageContext.request.contextPath}?page=previous">Previous</a></li>
+						<div class="nav_button">
+							<a href="${pageContext.request.contextPath}?page=previous" >Previous</a>
+						</div>
 					</c:if>
+					
 					<c:if test="${!albums.lastPage}">
-						<li><a href="${pageContext.request.contextPath}?page=next">Next</a></li>
+						<div class="nav_button">
+							<a href="${pageContext.request.contextPath}?page=next" >Next</a>
+						</div>
 					</c:if>
-				</ul>
-			</div>
-		</div>
+					<label id="numberPages">Page ${albums.page +1 } of ${albums.pageCount} </label>
+				</nav>
+			</footer>
+		</section>
+
+		<section id="topList">
+			<header>
+				<h3>Album Ranking</h3>
+			</header>
+			<article>
+	
+				<ol>
+					<li>albuuuum</li>
+					<li>albuuuum</li>
+					<li>albuuuum</li>
+					<li>albuuuum</li>
+					<li>albuuuum</li>
+				</ol>
+	
+			</article>
+		</section>
+	
+		<%@ include file="includes/footer.jsp" %>
+
 	</body>
+
 </html>

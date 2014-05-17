@@ -1,0 +1,1 @@
+<footer id="pageFooter">&copy Copy Right</footer>
