@@ -4,9 +4,9 @@
 	<nav id="topMenu">
 		<ul>
 			<li>
-				<a href='<spring:url value="/"></spring:url>'>Home</a>
+				<a href='<spring:url value="/"></spring:url>' data-testid="homeLink">Home</a>
 			</li><li>
-				<a href="album">Create Album</a>
+				<a href="album" data-testid="createAlbumLink">Create Album</a>
 			</li><li>
 				<a href="#">Link2</a>
 			</li>

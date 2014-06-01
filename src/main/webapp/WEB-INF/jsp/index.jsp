@@ -12,7 +12,7 @@
 				<h3>Album List</h3>
 			</header>	
 			<article>
-				<table class="table table-striped">
+				<table>
 					<tr>
 						<th>Name</th>
 						<th>Author</th>

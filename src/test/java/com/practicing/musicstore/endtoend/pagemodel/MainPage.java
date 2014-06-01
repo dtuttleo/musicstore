@@ -36,10 +36,6 @@ public class MainPage {
 		return homeLink;
 	}
 
-	public WebElement getHeader() {
-		return header;
-	}
-
 	public boolean isAlbumListed(Album album) {
 		return getRowContainingText(album);
 
